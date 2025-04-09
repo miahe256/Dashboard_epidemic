@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>香港疫情数据可视化大屏</title>
+    <!-- 删除对不存在的CSS文件的引用 -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- 使用国内CDN加载ECharts和jQuery -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.4.2/echarts.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>香港新冠疫情数据可视化大屏</h1>
+            <div class="update-time">数据更新时间：<span id="updateTime">未知</span></div>
+        </header>
+
+        <!-- 数据概览区 -->
+        <div class="overview-section">
+            <div class="card total-confirmed">
+                <h3>累计确诊</h3>
+                <div class="value" id="totalConfirmed">-</div>
+            </div>
+            <div class="card new-cases">
+                <h3>今日新增</h3>
+                <div class="value" id="newCasesToday">-</div>
+            </div>
+            <div class="card death-cases">
+                <h3>累计死亡</h3>
+                <div class="value" id="deathCases">-</div>
+            </div>
+            <div class="card cured-cases">
+                <h3>累计治愈</h3>
+                <div class="value" id="curedCases">-</div>
+            </div>
+        </div>
+
+        <!-- 时间趋势区 -->
+        <div class="charts-row">
+            <div class="chart-container">
+                <h3>每日新增与累计确诊趋势</h3>
+                <div id="trendChart" class="chart"></div>
+            </div>
+            <div class="chart-container">
+                <h3>新增病例增长率变化</h3>
+                <div id="growthRateChart" class="chart"></div>
+            </div>
+        </div>
+
+        <!-- 地区分布区 -->
+        <div class="charts-row">
+            <div class="chart-container">
+                <h3>各区确诊病例排名</h3>
+                <div id="districtChart" class="chart"></div>
+            </div>
+            <div class="chart-container">
+                <h3>热点区域排行</h3>
+                <div id="hotspotChart" class="chart"></div>
+            </div>
+        </div>
+
+        <!-- 香港地图区域 -->
+        <div class="charts-row">
+            <div class="chart-container full-width">
+                <h3>香港各区疫情分布地图</h3>
+                <div id="mapChart" class="chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 加载地图数据 -->
+    <script src="{{ url_for('static', filename='js/hk_map.js') }}"></script>
+    
+    <!-- 最后加载仪表板JS -->
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>
